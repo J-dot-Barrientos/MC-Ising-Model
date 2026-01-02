@@ -23,7 +23,7 @@ IMPLICIT NONE
   open (unit=10, file="Energy.dat", status="replace", iostat=ios) 
   do x = 1, num_MCS
         CALL spin_change(s_array, N, s_possible_array, S_i)
-        Delta_E = 2 * s_possible_array(S_i) * SUM( nbr_array(:, S_i))
+        Delta_E = 2 * s_possible_array(S_i) * SUM( s_array(nbr_array(:, S_i)))
         
         if (Delta_E < 0) then
                 s_array = s_possible_array
