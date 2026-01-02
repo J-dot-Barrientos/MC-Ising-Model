@@ -31,7 +31,9 @@ IMPLICIT NONE
                         s_array = s_possible_array
                 end if
         end if
-        print*, x
+        if (mod(x, 1000) == 0) then
+                print *, x
+          end if
   end do
 
   CALL CALC_E_M(s_array, nbr_array, L, E, M)
