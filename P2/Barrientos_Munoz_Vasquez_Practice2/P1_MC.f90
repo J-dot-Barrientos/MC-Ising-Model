@@ -13,12 +13,15 @@ IMPLICIT NONE
   DOUBLE PRECISION, ALLOCATABLE :: table(:)
   INTEGER :: Delta_E, idx, meas_step
   REAL :: r1279
-  DOUBLE PRECISION :: t_start, t_end, t_elapsed, fps
-  
+  ! DOUBLE PRECISION :: t_start, t_end, t_elapsed, fps
+  ! INTEGER(8) :: total_flips
+
   N = L**2
 
   meas_step = num_MCS / num_mes
         
+  ! total_flips = 1_8 * num_MCS * N
+
   call setr1279(1234)
   
   allocate(nbr_array(4, N), s_array(N), s_possible_array(N), table(9))
@@ -62,7 +65,7 @@ IMPLICIT NONE
   CALL Output(E,N)
   print *, "MC Simulation completed"
   ! print *, "CPU time (s) =", t_elapsed
-  ! print *, "Attempted flips =", num_MCS * N
+  ! print *, "Attempted flips =", total_flips
   ! print *, "MC speed =", fps, " flips/s"
 
 END PROGRAM P1_MC
