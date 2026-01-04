@@ -13,7 +13,7 @@ CONTAINS
     INTEGER, INTENT(in) :: L
 
     INTEGER, INTENT(out) :: M
-    REAL*16, INTENT(out) :: E
+    DOUBLE PRECISION, INTENT(out) :: E
  
     INTEGER :: num_part   
     INTEGER :: i,z,j, dmn
@@ -31,7 +31,7 @@ CONTAINS
 
     do i=1,num_part
       do j=1,z
-        E = E - 0.5_16*REAL(s_array(i)) * REAL(s_array(nbr_array(j, i)))
+        E = E - 0.5_16*dble(s_array(i)) * dble(s_array(nbr_array(j, i)))
       end do
     end do
 

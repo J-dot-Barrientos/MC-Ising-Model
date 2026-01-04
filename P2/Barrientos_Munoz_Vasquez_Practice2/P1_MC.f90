@@ -32,7 +32,7 @@ IMPLICIT NONE
   
   CALL write_table(table)
 
-  open (unit=10, file="Energy.dat", status="replace")
+  open (unit=10, file="Energy2.dat", status="replace")
 
   ! call cpu_time(t_start)
 
@@ -73,7 +73,7 @@ END PROGRAM P1_MC
   SUBROUTINE Output(E,N)
   IMPLICIT NONE
 
-    REAL*16, INTENT(in) :: E
+    DOUBLE PRECISION, INTENT(in) :: E
     INTEGER, INTENT(in) :: N
     print'(A, F10.3)', "Energy = ", E/N
 
