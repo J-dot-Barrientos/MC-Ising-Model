@@ -14,6 +14,10 @@ Estos valores se pueden modificar de la siguiente forma:
      ```
      make -f Makefiles
      ```
+   - Alternativamente:
+     ```
+     gfortran Variables.f90 r1279.f90 spin.f90 Measureament_Observable.f90 lattice.f90 table_data.f90 ran2.f MAIN.f90 -o <ejecutable>       
+     ```
    - Una vez finalizada la compilación, ejecuta el archivo de salida (por ejemplo, `P1_MC.out`) con:
      ```
      ./P1_MC.out
