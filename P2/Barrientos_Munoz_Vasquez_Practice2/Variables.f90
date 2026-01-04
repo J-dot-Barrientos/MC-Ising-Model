@@ -1,12 +1,8 @@
 MODULE Variables
 IMPLICIT NONE
 
-  REAL*8 :: temp=2 
-  INTEGER :: L = 4
-  
-  INTEGER :: num_MCS = 10**8 * 4**2
-  INTEGER :: num_mes
-
-
-
+  DOUBLE PRECISION :: temp = 2.27 
+  INTEGER :: L = 100
+  INTEGER :: num_MCS = 1000000
+  INTEGER :: num_mes = 10
 END MODULE Variables
