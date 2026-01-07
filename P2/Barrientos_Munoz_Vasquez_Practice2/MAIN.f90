@@ -9,8 +9,7 @@ IMPLICIT NONE
 
   DOUBLE PRECISION :: E
   INTEGER :: M, N, i, x, S_i
-  INTEGER, ALLOCATABLE :: nbr_array(:,:), s_array(:) 
-  INTEGER :: s_possible_array
+  INTEGER, ALLOCATABLE :: nbr_array(:,:), s_array(:), s_possible_array(:)
   DOUBLE PRECISION, ALLOCATABLE :: table(:)
   INTEGER :: Delta_E, idx, meas_step
   REAL :: r1279
@@ -18,12 +17,12 @@ IMPLICIT NONE
   ! INTEGER(8) :: total_flips
 
   N = L**2
-        
+
   ! total_flips = 1_8 * num_MCS * N
 
   call setr1279(num_mes)
   
-  allocate(nbr_array(4, N), s_array(N), table(9))
+  allocate(nbr_array(4, N), s_array(N), s_possible_array(N), table(9))
 
   CALL neighbors(L, nbr_array)
   
@@ -31,20 +30,20 @@ IMPLICIT NONE
   
   CALL write_table(table)
 
-  open (unit=10, file="Energy2.dat", status="replace")
+  open (unit=10, file="Energy4.dat", status="replace")
 
   ! call cpu_time(t_start)
 
   do x = 1, num_MCS
       do i = 1, N
           CALL spin_change(s_array, N, s_possible_array, S_i)
-          Delta_E = -2 * s_possible_array * sum(s_array(nbr_array(:, S_i)))
+          Delta_E = -2 * s_possible_array(S_i) * sum(s_array(nbr_array(:, S_i)))
           if (Delta_E < 0) then
-              s_array(S_i) = s_possible_array
+              s_array(S_i) = s_possible_array(S_i)
               else
                 idx = (Delta_E + 2*4)/2 + 1
                 if (r1279() < table(idx)) then
-                    s_array(S_i) = s_possible_array
+                    s_array(S_i) = s_possible_array(S_i)
                 end if
           end if
       end do
