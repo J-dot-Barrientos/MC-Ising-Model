@@ -16,7 +16,10 @@ Estos valores se pueden modificar de la siguiente forma:
      ```
    - Alternativamente:
      ```
-     gfortran Variables.f90 r1279.f90 spin.f90 Measureament_Observable.f90 lattice.f90 table_data.f90 ran2.f MAIN.f90 -o <ejecutable>       
+     gfortran -O3 -march=native -funroll-loops -ffast-math \
+Variables.f90 r1279.f90 spin.f90 Measureament_Observable.f90 lattice.f90 table_data.f90 ran2.f MAIN.f90 \
+-o ising_opt
+       
      ```
    - Una vez finalizada la compilación, ejecuta el archivo de salida (por ejemplo, `P1_MC.out`) con:
      ```
