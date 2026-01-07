@@ -17,8 +17,6 @@ IMPLICIT NONE
   ! INTEGER(8) :: total_flips
 
   N = L**2
-
-  meas_step = num_MCS / num_mes
         
   ! total_flips = 1_8 * num_MCS * N
 
@@ -50,7 +48,7 @@ IMPLICIT NONE
           end if
       end do
           
-      if (mod(x, meas_step) == 0) then
+      if (mod(x, num_mes) == 0) then
           CALL CALC_E_M(s_array, nbr_array, L, E, M)
           write(10, *) E
           print *, x
