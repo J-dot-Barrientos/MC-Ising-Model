@@ -1,0 +1,14 @@
+set encoding utf8
+
+
+set xlabel "Tamaño de bin"
+set ylabel "Error estadistico"
+set title "Error estadistico vs tamaño de bin"
+set grid
+
+set logscale x   # o: set logscale x 2
+
+
+# Saltar las 2 primeras líneas y usar col 1 (bin) y col 2 (Error estadistico)
+plot "FULLCRITICAL_output.dat" every ::2 using 1:3 with linespoints title "Error estadistico"
+
