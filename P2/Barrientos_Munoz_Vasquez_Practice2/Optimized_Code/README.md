@@ -1,6 +1,6 @@
 # Información sobre Variables Modificables
 
-En este programa puedes cambiar dos variables principales:
+Se encuentran en Variables.f90:
 
 - **T** : controla el valor de la temperatura en la simulación.
 - **L** : determina la dimensión o el tamaño del sistema simulado.
