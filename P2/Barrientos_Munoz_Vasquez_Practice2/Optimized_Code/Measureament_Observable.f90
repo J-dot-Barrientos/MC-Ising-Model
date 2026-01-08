@@ -1,12 +1,9 @@
 MODULE MEASUREMENT_OBSERVABLE
-
-	! USE READ_SPIN
-	USE spin
 IMPLICIT NONE
 
 CONTAINS
 
-  SUBROUTINE CALC_E_M(s_array, nbr_array, L, E, M)
+  SUBROUTINE Calc_E_M(s_array, nbr_array, L, E, M)
     
     IMPLICIT NONE
     INTEGER, INTENT(in) :: nbr_array(:,:), s_array(:)
@@ -17,17 +14,15 @@ CONTAINS
  
     INTEGER :: num_part   
     INTEGER :: i,z,j, dmn
-    !INTEGER, ALLOCATABLE :: s_array(:)
 
-    num_part = L**2
-    dmn = 2
-
-    !ALLOCATE(s_array(num_part))
-
-    ! CALL Read_S(s_array, Num_part)
+    num_part = L**2                                   ! Calculo numero de spins
+    dmn = 2                                           ! Calculo numero de dimensiones del sistema
     
     E = 0
     z = dmn*2
+
+
+    ! Calculo de la Energia del sistema, depende de todos los spines y sus vecinos
 
     do i=1,num_part
       do j=1,z
@@ -35,11 +30,16 @@ CONTAINS
       end do
     end do
 
-    M = CALC_M(s_array, num_part)
-     
-  END SUBROUTINE CALC_E_M
+    ! Calcular Magnetizacion
 
-  INTEGER FUNCTION CALC_M(s_array, num_part)
+    M = CALC_M(s_array, num_part)
+    
+  
+  END SUBROUTINE Calc_E_M
+
+! ------------------------------------------------------
+
+  INTEGER FUNCTION Calc_M(s_array, num_part)
 
     INTEGER, INTENT(in) :: s_array(:)
     INTEGER, INTENT(in) :: num_part
@@ -49,12 +49,16 @@ CONTAINS
 
     M = 0
 
+
+    ! Calculo de Magentizacion como la suma de todos los spines del sistema
+
     do i=1,num_part
       M = M + s_array(i)
     end do
 
     CALC_M = M
 
-  END FUNCTION CALC_M
+
+  END FUNCTION Calc_M
 
 END MODULE MEASUREMENT_OBSERVABLE

@@ -1,39 +1,42 @@
-module lattice
+module INITIALIZE_LATTICE
     implicit none
 contains
 
-    subroutine neighbors(L, nbrs)
+    subroutine Specify_Neighbors(L, nbrs)
         implicit none
         integer, intent(in) :: L
-        integer, intent(out) :: nbrs(:,:)   ! dimension (4, L*L)
-        integer, allocatable :: in(:,:)
+        integer, intent(out) :: nbrs(:,:)   ! dimension (4, Num_part), contiene los vecinos de cada particula
+        integer, allocatable :: in(:,:)     ! dimension (2, L), tabla de consulta para la periocidad
         integer :: x, y, i
 
-        ! Allocate periodic lookup table
         allocate(in(2,L))
 
-        ! Left (1) and right (2) indices
-        do i = 1, L
-            in(1,i) = i - 1
-            in(2,i) = i + 1
-        end do
-        in(1,1) = L
-        in(2,L) = 1
 
-        ! Fill neighbor mapping
+        ! Condiciones periodicas 'toroidal' 
+
+        do i = 1, L
+            in(1,i) = i - 1             ! izq
+            in(2,i) = i + 1             ! der
+        end do
+        in(1,1) = L                     ! arriba
+        in(2,L) = 1                     ! abajo
+
+        ! Llenar la array de los vecinos
+
         i = 0
         do y = 1, L
             do x = 1, L
                 i = i + 1
-                nbrs(1,i) = in(2,x) + (y-1)*L     ! right
-                nbrs(2,i) = in(1,x) + (y-1)*L     ! left
-                nbrs(3,i) = x + (in(2,y)-1)*L     ! down
-                nbrs(4,i) = x + (in(1,y)-1)*L     ! up
+                nbrs(1,i) = in(2,x) + (y-1)*L     ! der
+                nbrs(2,i) = in(1,x) + (y-1)*L     ! izq
+                nbrs(3,i) = x + (in(2,y)-1)*L     ! abajo
+                nbrs(4,i) = x + (in(1,y)-1)*L     ! arriba
             end do
         end do
 
-        deallocate(in)
-    end subroutine neighbors
 
-end module lattice
+        deallocate(in)
+    end subroutine Specify_Neighbors
+
+end module INITIALIZE_LATTICE
 
